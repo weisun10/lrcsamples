@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!-- © Copyright 1994-2019 Micro Focus or one of its affiliates -->
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Title</title>
+    </head>
+    <body>
+        <h1>iframe 1</h1>
+        <div>
+            <button id="btnf1">button in iframe one</button>
+            <span id="result"></span>
+        </div>
+        <script type="text/javascript">
+            //document.domain = "localhost";
+            console.log("frame1.href :", window.location.href);
+
+            function update(count) {
+                result.innerHTML = `Click button btnf1: ${count}`;
+            }
+
+            let count = 0;
+            let btnf1 = document.getElementById("btnf1");
+            let result = document.getElementById("result");
+            btnf1.addEventListener("click", () => {
+                update(++count);
+            });
+        </script>
+    </body>
+</html>

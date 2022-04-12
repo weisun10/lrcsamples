@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!-- © Copyright 1994-2019 Micro Focus or one of its affiliates -->
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Title</title>
+    <style>
+        div.sidebar {
+            border: 1px;
+            border-color: black;
+            border-style: solid;
+            margin: -1px;
+            height: 100%;
+        }
+
+        div.clear {
+            clear: both;
+            overflow: hidden;
+        }
+
+        #left {
+            float: left;
+            width: 50%;
+        }
+
+        #footer {
+            float: left;
+            width: 100%;
+            height: 500px;
+        }
+
+        #right {
+            float: left;
+            width: 50%;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            margin: 3px;
+            border-style: none;
+        }
+    </style>
+</head>
+<body>
+<div class="sidebar" id="left" style="height: 60px" align="center"><h3>Non-Cross-Domain</h3></div>
+<div class="sidebar" id="right" style="height: 60px" align="center"><h3>Cross-Domain</h3></div>
+<div class="sidebar" id="left">
+    <iframe src="./frame0.html"></iframe>
+</div>
+<div class="sidebar" id="right">
+    <iframe src="./frame0.html"></iframe>
+</div>
+<div class="sidebar" id="left">
+    <iframe src="./frame1.html"></iframe>
+</div>
+<div class="sidebar" id="right">
+    <iframe src="./frame1.html"></iframe>
+</div>
+<div class="clear"></div>
+<div style="margin: 5px 0px 5px 0px;">
+    <button id="btnm">button in main</button>
+    <span id="result"></span>
+</div>
+<span>Modified subdomain to https site</span>
+<div class="sidebar" id="footer">
+    <iframe src="https://advantageonlineshopping.com/#/category/Laptops/1"></iframe>
+</div>
+<script type="text/javascript">
+    //document.domain = "localhost";
+    let frame0 = window.frames[0];
+    let frame1 = window.frames[1];
+    setTimeout(() => {
+        console.log("setTimeout 1000");
+        console.log("!!!work by setTimeout!!! window.frame0.btnf0", window.frames[0].document);
+        console.log("!!!work by setTimeout!!! window.frame1.btnf1 ", window.frames[1].document);
+    }, 3000);
+    frame0.addEventListener("load", () => {
+        console.log("frame0 loaded");
+        console.log("!!!work by addEventListener!!! window.frame0.btnf0", window.frames[0].document.getElementById("btnf0"));
+    });
+    frame1.addEventListener("load", () => {
+        console.log("frame1 loaded");
+        console.log("!!!work by addEventListener!!! window.frame1.btnf1 ", window.frames[1].document.getElementById("btnf1"));
+    });
+
+    function update(count) {
+        result.innerHTML = `Click button btnm: ${count}`;
+    }
+
+    let count = 0;
+    let btnm = document.getElementById("btnm");
+    let result = document.getElementById("result");
+    btnm.addEventListener("click", () => {
+        update(++count);
+    });
+</script>
+</body>
+</html>
