@@ -1,10 +1,12 @@
 $tenantId = "652261341"
 $projectId = 117
-$scriptId = 1345
+$scriptId = 1395
 $scriptFile = "web test.zip"
+$keepRts = "true"
+$keepRunLogic = "true"
 $SRL = "https://loadrunner-cloud.saas.microfocus.com"
 $loginUrl = "$SRL/v1/auth?TENANTID=$tenantId"
-$reloadScriptUrl="$SRL/v1/projects/$projectId/scripts/$scriptId/file?TENANTID=$tenantId"
+$reloadScriptUrl="$SRL/v1/projects/$projectId/scripts/$scriptId/file?TENANTID=$tenantId&keepRts=$keepRts&keepRunLogic=$keepRunLogic"
 
 # credentials for login
 $credentials = '{ 
