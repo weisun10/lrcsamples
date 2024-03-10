@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gitagent-pod
+spec:
+  initContainers:
+    - name: gitagbnt-init-container
+      image: busybox:latest
+      command: ['/bin/sh', '-c', 'cp /tmp/gitagent/config.json /opt/gitworkspace/']
+      volumeMounts:
+        - name: gitagent-workspace
+          mountPath: /opt/gitworkspace
+        - name: config-json
+          mountPath: /tmp/gitagent
+  containers:
+    - name: gitagent-container
+      image: performancetesting/lrc_git_agent:latest
+      envFrom:
+        - configMapRef:
+            name: cfgmap-env-gitagent
+      volumeMounts:
+        - name: gitagent-workspace
+          mountPath: /opt/gitworkspace
+  volumes:
+    - name: gitagent-workspace
+      persistentVolumeClaim:
+        claimName: gitagent-pvc
+    - name: config-json
+      configMap:
+        name: gitagent-config-json
+

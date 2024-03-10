@@ -1,0 +1,14 @@
+[
+       {
+             "url": "https://github.com/weisun10/testgit.git",
+             "branches": [
+                    "master"
+             ]
+       },
+       {
+             "url": "https://github.com/weisun10/testgit.git",
+             "branches": [
+                    "testbranch"
+             ]
+       }
+]
